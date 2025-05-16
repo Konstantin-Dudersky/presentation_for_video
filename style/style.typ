@@ -12,17 +12,20 @@
 
   #show heading.where(level: 1): it => {
     set align(center)
+    pagebreak()
     it
     v(1em, weak: true)
   }
 
   #show heading.where(level: 2): it => {
     set align(center)
+    pagebreak()
     it
     v(1em, weak: true)
   }
 
   #show heading.where(level: 3): it => {
+    pagebreak()
     it
     v(1em, weak: true)
   }
@@ -55,11 +58,7 @@
     )[#title]
   ]
 
-  #pagebreak()
-
   #outline()
-
-  #pagebreak()
 
   #doc
 ]
