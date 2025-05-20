@@ -13,15 +13,27 @@
   image("images/Luckfox-Lyra-Ultra-1-1000x1000.jpg", width: 70%)
 )
 
-Rockhip RK3506 - 3xCortex-A7 (ARMv7)
+= Rust
 
-= Подготовка среды разработки
+Программу можно писать на любом
 
-Устанавливаем Rust, если не установлен:
+Будем писать на Rust
+
+Устанавка на Linux:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
+
+= Платформы
+
+Rockhip RK3506 - 3xCortex-A7 (ARMv7)
+
+Бывает ARM64, RISC-V
+
+armv7-unknown-linux-gnueabihf
+
+= Подготовка среды разработки
 
 Установка библиотек (Ubuntu):
 
@@ -34,6 +46,8 @@ sudo apt install gcc-arm-linux-gnueabihf
 ```bash
 rustup target add armv7-unknown-linux-gnueabihf
 ```
+
+cross
 
 = Создание проекта
 
