@@ -35,13 +35,13 @@
   #set page(
     paper: "a5",
     margin: (x: 0.5cm, y: 1.2cm),
-    fill: rgb("444352"),
+    fill: rgb("27293a"),
     numbering: "1 / 1",
     header: [#align(center)[#header]]
   )
 
   #set text(
-    fill: rgb("fdfdfd"),
+    fill: rgb("eaf2f1"),
     size: 2em
   )
 
@@ -61,4 +61,15 @@
   #outline()
 
   #doc
+
+  = О нас
+
+  - разработка печатных плат
+  - изготовление плат и монтаж компонентов
+  - разработка ПО (ESP, Linux)
+
+  Контакты:
+  - Email: #link("konstantin.dudersky@yandex.ru")
+  - Telegram: #link("https://t.me/konstantin_dudersky")[konstantin_dudersky]
+  - Web: #link("https://tokarev.by")
 ]
