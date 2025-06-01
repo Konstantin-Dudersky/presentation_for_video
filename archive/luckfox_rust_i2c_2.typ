@@ -9,13 +9,30 @@
   title: [Luckfox Lyra - опрос устройств по протоколу #i2c],
 )
 
-= #i2c
-
 = Создание проекта
 
 ```bash
 cargo new i2c
 cargo add i2cdev
+```
+
+= Программа
+
+Доступ к адаптеру:
+
+```rust
+let mut dev = LinuxI2CDevice::new("/dev/i2c-0", 0x38).unwrap();
+```
+
+Чтение / запись:
+
+```rust
+let mut msgs = [
+    LinuxI2CMessage::write(&[0xAC, 0x33, 0x00]),
+    LinuxI2CMessage::read(&mut read_data),
+];
+
+dev.transfer(&mut msgs).unwrap();
 ```
 
 = Сборка
