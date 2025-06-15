@@ -7,26 +7,29 @@
   title: [Luckfox Lyra - создаем графику с помощью Slint],
 )
 
+= Графические библиотеки
+
+- #link("https://lvgl.io")[LVGL]
+- #link("https://slint.dev")[Slint]
+
 = Slint
 
-https://slint.dev
-
-Backend:
+Бекенды:
 - qt
 - winit
-- *linuxkms*
+- #highlight[linuxkms]
 
-Renderer:
-- qt
-- *software*
+Рендеры:
+- qt (soft)
+- software
 - femtovg (OpenGL)
-- skia (OpenGL / Vulkan)
+- #highlight[skia] (OpenGL / Vulkan / soft)
 
 = Конфигурация buildroot
 
-Target packages -> Libraries -> Hardware handling -> libinput
-Target packages -> Libraries -> Hardware handling -> libxkbcommon
-Target packages -> Libraries -> Graphics -> fontconfig
+- Target packages -> Libraries -> Hardware handling -> libinput
+- Target packages -> Libraries -> Hardware handling -> libxkbcommon
+- Target packages -> Libraries -> Graphics -> fontconfig
 
 = Создаём проект
 
@@ -39,13 +42,52 @@ cargo new slint
 ```toml
 slint = { version = "*", default-features = false, features = [
     "compat-1-2",
-    "std",
     "backend-linuxkms-noseat",
     "renderer-skia",
 ] }
 
 [build-dependencies]
 slint-build = "*"
+```
+
+= `main.slint`
+
+```slint
+export component MainWindow inherits Window {
+    width: 800px;
+    height: 480px;
+    default-font-size: 20px;
+
+    property <int> counter;
+
+    VerticalLayout {
+        alignment: center;
+        spacing: 30px;
+        width: 200px;
+
+        ...
+    }
+}
+```
+
+#pagebreak()
+
+```slint
+Button {
+    width: 100%;
+    height: 80px;
+    text: "Увеличить";
+    clicked => {
+        counter += 1;
+    }
+}
+```
+
+```slint
+Text {
+    text: "Счётчик: " + counter;
+    horizontal-alignment: center;
+}
 ```
 
 = `build.rs`
@@ -59,15 +101,6 @@ fn main() {
         ::compile_with_config
         ("main.slint", config)
         .unwrap();
-}
-```
-
-= `main.slint`
-
-```slint
-export component MainWindow inherits Window {
-    width: 800px;
-    height: 480px;
 }
 ```
 
@@ -121,9 +154,13 @@ git clone https://github.com/slint-ui/slint.git
 
 `Cargo.toml`:
 
-Добавить фичи "backend-linuxkms-noseat", "renderer-skia";
-
 ```toml
+slint = { version = "*", default-features = false, features = [
+    "compat-1-2",
+    "backend-linuxkms-noseat",
+    "renderer-skia",
+] }
+
 [package.metadata.cross.target.armv7-unknown-linux-gnueabihf]
 image = "ghcr.io/slint-ui/slint/armv7-unknown-linux-gnueabihf"
 ```
@@ -141,10 +178,10 @@ scp ../../target/armv7-unknown-linux-gnueabihf/release/energy-monitor root@targe
 = Home automation
 
 `Cargo.toml`:
+
 ```toml
 slint = { version = "*", default-features = false, features = [
     "compat-1-2",
-    "std",
     "backend-linuxkms-noseat",
     "renderer-skia",
 ] }

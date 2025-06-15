@@ -10,6 +10,9 @@
 
   #set heading(numbering: "1.1.")
 
+  #set highlight(fill: rgb("#ffd76d"))
+  #show highlight: set text(rgb("#000000"))
+
   #show heading.where(level: 1): it => {
     set align(center)
     pagebreak()
